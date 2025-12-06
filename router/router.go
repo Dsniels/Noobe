@@ -1,12 +1,16 @@
 package router
 
-import "net/http"
+import (
+	"net/http"
 
-func InitRoutes() *http.ServeMux {
+	"github.com/dsniels/noobe/handlers"
+	mdw "github.com/dsniels/noobe/middleware"
+)
+
+func InitRoutes() http.Handler {
 
 	router := http.NewServeMux()
-	
-	
+	router.HandleFunc("/", handlers.HomepageHandler)
 
-	return router
+	return mdw.ExceptionMiddleware(router)
 }
